@@ -19,8 +19,8 @@ I have pushed the docker images to docker hub publically for all services.
 
 ### 1. clone the repository 
 ```
-git clone https://github.com/Vincent7891/Learning-Microservices.git
-cd Learning-Microservices
+git clone https://github.com/Vincent7891/MicroservicesArchitectureApp.git
+cd MicroservicesArchitectureApp
 ```
 ### 2. Deploy Microservices
 ```
