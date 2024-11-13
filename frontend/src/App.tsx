@@ -1,61 +1,37 @@
-import { useState } from "react"
-import axios from "axios"
-
-type ServiceResponses = {
-	go: string
-	node: string
-	python: string
-}
+import usePodCounts from "./hooks/usePodCounts"
+import ServiceGraph from "./components/ServiceGraph"
 
 const App = () => {
-	const [responses, setResponses] = useState<ServiceResponses>({
-		go: "",
-		node: "",
-		python: "",
-	})
-	const apiGatewayLocalUrl = import.meta.env.VITE_APIGATEWAY_LOCAL_URL
-
-	const callService = async (service: keyof ServiceResponses) => {
-		try {
-			const response = await axios.get(`${apiGatewayLocalUrl}/${service}`)
-			setResponses((prev) => ({
-				...prev,
-				[service]: response.data,
-			}))
-		} catch (error) {
-			console.error(`Error calling ${service} service`, error)
-			setResponses((prev) => ({
-				...prev,
-				[service]: `Failed to contact ${
-					service.charAt(0).toUpperCase() + service.slice(1)
-				} Service`,
-			}))
-		}
-	}
+	const { loading, callService, getChartData } = usePodCounts()
 
 	return (
-		<div>
-			<h1>Microservices</h1>
+		<div className="p-6 bg-gray-100 min-h-screen font-sans">
+			<h1 className="text-3xl font-bold text-center text-gray-800 mb-12">
+				Microservices load balancing visualisation
+			</h1>
 
-			<div className="mb-5">
-				<button onClick={() => callService("go")}>
-					Call Go Service
-				</button>
-				<p>{responses.go}</p>
-			</div>
-
-			<div className="mb-5">
-				<button onClick={() => callService("node")}>
-					Call Node.js Service
-				</button>
-				<p>{responses.node}</p>
-			</div>
-
-			<div className="mb-5">
-				<button onClick={() => callService("python")}>
-					Call Python Service
-				</button>
-				<p>{responses.python}</p>
+			<div className="flex flex-wrap justify-center gap-4">
+				<ServiceGraph
+					service="Go"
+					loading={loading.go}
+					callService={() => callService("go")}
+					data={getChartData("go")}
+					color="#8884d8"
+				/>
+				<ServiceGraph
+					service="Node.js"
+					loading={loading.node}
+					callService={() => callService("node")}
+					data={getChartData("node")}
+					color="#82ca9d"
+				/>
+				<ServiceGraph
+					service="Python"
+					loading={loading.python}
+					callService={() => callService("python")}
+					data={getChartData("python")}
+					color="#ffc658"
+				/>
 			</div>
 		</div>
 	)
