@@ -11,7 +11,6 @@ I've been wanting to expand my knowledge of different ways a system can be archi
 Before getting started, please ensure you have the following installed:
 
 Kubernetes: To manage and orchestrate the microservices.
-Docker: For containerising each service.
 Minikube: For local Kubernetes deployment.
 
 I have pushed the docker images to docker hub publically for all services.
