@@ -2,6 +2,11 @@
 
 This repository contains a collection of (simple) microservices deployed using Kubernetes. Each service is containerised with Docker, and Kubernetes is used for orchestrating and managing the containers. This project includes a Go, express and flask service with an API gateway. The frontend uses react and tailwind CSS and was setup using vite. 
 
+At the time of writing, the frontend shows a visualisation of how kubernetes applies load balancing to the deployed pods for a given service.
+
+## Motivations for this project
+I've been wanting to expand my knowledge of different ways a system can be architected, and thought this would be a good way of getting some hands on practice with microservices and kubernetes. From my job, I'm most familiar with deployment using AWS Fargate and ECS, which abstracts a lot of the scalability for you, so I thought learning about what might be possible with kubernetes would be interesting.
+
 ## Prerequisites
 Before getting started, please ensure you have the following installed:
 
