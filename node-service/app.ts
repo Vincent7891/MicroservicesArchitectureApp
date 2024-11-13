@@ -4,6 +4,7 @@ import os from "os"
 const app = express()
 
 app.get("/", (req, res) => {
+	res.set("Connection", "close")
 	res.send(`Hello from Node.js service! Host: ${os.hostname()}`)
 })
 

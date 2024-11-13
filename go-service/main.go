@@ -7,6 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Connection", "close")
     hostname, _ := os.Hostname()
     fmt.Fprintf(w, "Hello from Go service! Host: %s", hostname)
 }
